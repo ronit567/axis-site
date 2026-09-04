@@ -1,0 +1,699 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Axis — the campus marketplace for Western students</title>
+<meta name="description" content="Axis is a buy, sell, and trade marketplace for verified Western University students. Real accounts, campus pickups, no payment middleman.">
+<meta name="theme-color" content="#5F2F96">
+<meta property="og:title" content="Axis — the campus marketplace for Western students">
+<meta property="og:description" content="Buy, sell, and trade with verified students on your own campus.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M32 10 60 24 32 38 4 24Z' fill='%235C2D91'/%3E%3Cpath d='M16 30v9c0 5.5 7.2 9.5 16 9.5s16-4 16-9.5v-9l-16 8Z' fill='%239B86C4'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Gabarito:wght@600;700;900&display=swap">
+<link rel="stylesheet" href="styles.css">
+<style>
+/* ── hero ─────────────────────────────────────────────────── */
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: 60px;
+  align-items: center;
+  padding: 72px 0 96px;
+}
+@media (max-width: 940px) {
+  .hero { grid-template-columns: 1fr; gap: 52px; padding: 52px 0 76px; }
+}
+
+.hero .eyebrow { color: var(--brand-lift); margin-bottom: 22px; }
+.hero h1 {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: clamp(40px, 5.8vw, 66px);
+  line-height: 0.99;
+  letter-spacing: -0.036em;
+  margin: 0;
+  color: #FFFFFF;
+}
+.hero h1 em { font-style: normal; color: var(--brand-lift); }
+.hero .lede {
+  max-width: 44ch;
+  margin: 24px 0 0;
+  font-size: 18px;
+  line-height: 1.58;
+  color: var(--on-brand-soft);
+}
+.hero .mono-inline { font-family: var(--mono); font-size: 0.93em; }
+
+.cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 18px;
+  margin-top: 34px;
+}
+.soon {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  color: var(--on-brand-soft);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.soon .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--brand-lift); flex: none; }
+
+/* ── listing stack ────────────────────────────────────────── */
+.stack { position: relative; min-height: 372px; }
+.lcard {
+  background: var(--card);
+  border-radius: 18px;
+  padding: 17px;
+  box-shadow: 0 18px 44px rgba(28, 6, 58, 0.28);
+  display: grid;
+  grid-template-columns: 54px 1fr;
+  gap: 14px;
+  align-items: center;
+  color: var(--ink);
+}
+.stack .lcard { position: absolute; left: 0; right: 0; }
+.stack .l1 { top: 0;    transform: rotate(-2.2deg) translateX(-6px); z-index: 3; }
+.stack .l2 { top: 124px; transform: rotate(1.5deg)  translateX(20px); z-index: 2; }
+.stack .l3 { top: 248px; transform: rotate(-0.7deg); z-index: 1; }
+@media (max-width: 940px) {
+  .stack { min-height: 0; display: grid; gap: 13px; }
+  .stack .lcard { position: static; transform: none; box-shadow: 0 12px 32px rgba(28, 6, 58, 0.24); }
+}
+
+.thumb {
+  width: 54px; height: 54px;
+  border-radius: 13px;
+  display: grid;
+  place-items: center;
+  color: #FFFFFF;
+}
+.t-book   { background: linear-gradient(150deg, #7040B4, #4A2070); }
+.t-fridge { background: linear-gradient(150deg, #2F7D9E, #1D5872); }
+.t-ticket { background: linear-gradient(150deg, #C0553E, #8E3826); }
+
+.lcard .cat {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+.lcard h3 {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: -0.012em;
+  line-height: 1.2;
+  margin: 4px 0 7px;
+}
+.lcard .meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 3px 9px;
+  font-size: 12.5px;
+  color: var(--ink-soft);
+}
+.lcard .price {
+  font-family: var(--mono);
+  font-weight: 500;
+  font-size: 13.5px;
+  color: var(--brand);
+  font-variant-numeric: tabular-nums;
+}
+.lcard .sep { color: var(--line); }
+.tick {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--verified);
+  font-weight: 500;
+  font-size: 12px;
+}
+
+/* ── category band ────────────────────────────────────────── */
+.band {
+  border-bottom: 1px solid var(--line);
+  background: var(--card);
+}
+.band .inner {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px 14px;
+  padding: 26px 0;
+}
+.band .eyebrow { color: var(--ink-mute); margin-right: 6px; }
+.pill {
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 15px;
+  padding: 8px 17px;
+  border-radius: 30px;
+  border: 1px solid var(--brand-line);
+  color: var(--ink-soft);
+  background: var(--paper);
+  white-space: nowrap;
+}
+.pill.on { background: var(--brand); border-color: var(--brand); color: #FFFFFF; }
+
+/* ── steps ────────────────────────────────────────────────── */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 44px;
+}
+@media (max-width: 820px) { .steps { grid-template-columns: 1fr; gap: 34px; } }
+.step { border-top: 1.5px solid var(--brand); padding-top: 22px; }
+.step .n {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--brand);
+  display: block;
+  margin-bottom: 14px;
+}
+.step h3 {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 22px;
+  letter-spacing: -0.02em;
+  margin: 0 0 10px;
+}
+.step p { margin: 0; color: var(--ink-soft); font-size: 16px; line-height: 1.58; }
+
+/* ── trust ────────────────────────────────────────────────── */
+.trust { background: var(--paper-alt); }
+.tgrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+@media (max-width: 820px) { .tgrid { grid-template-columns: 1fr; gap: 16px; } }
+.tcard {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 30px 28px 32px;
+}
+.tcard .ico {
+  width: 38px; height: 38px;
+  border-radius: 11px;
+  background: var(--brand-tint);
+  color: var(--brand);
+  display: grid;
+  place-items: center;
+  margin-bottom: 20px;
+}
+.tcard h3 {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 19px;
+  letter-spacing: -0.018em;
+  margin: 0 0 8px;
+}
+.tcard p { margin: 0; font-size: 15.5px; line-height: 1.55; color: var(--ink-soft); }
+
+/* ── closing ──────────────────────────────────────────────── */
+.closing { text-align: center; padding: 92px 0; }
+.closing h2 {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: clamp(30px, 4.4vw, 46px);
+  line-height: 1.04;
+  letter-spacing: -0.034em;
+  margin: 0 auto;
+  max-width: 17ch;
+  color: #FFFFFF;
+}
+.closing p {
+  margin: 18px auto 0;
+  max-width: 42ch;
+  font-size: 17px;
+  color: var(--on-brand-soft);
+}
+.closing .btn { margin-top: 30px; }
+@media (max-width: 760px) { .closing { padding: 68px 0; } }
+
+/* ── privacy policy ───────────────────────────────────────── */
+.policy {
+  background: var(--paper-alt);
+  scroll-margin-top: 0;
+}
+.policy .doc {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  padding: 54px 58px 56px;
+  max-width: 760px;
+  margin: 0 auto;
+}
+@media (max-width: 760px) { .policy .doc { padding: 34px 24px 40px; border-radius: 16px; } }
+
+.doc h2 {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(28px, 3.6vw, 38px);
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+  margin: 0;
+}
+.doc .stamp {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  color: var(--ink-mute);
+  margin: 14px 0 0;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--line);
+}
+.doc .intro {
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  margin: 28px 0 0;
+}
+.doc h3 {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: -0.018em;
+  margin: 38px 0 11px;
+}
+.doc p {
+  margin: 0 0 14px;
+  font-size: 16.5px;
+  line-height: 1.66;
+  color: var(--ink-soft);
+}
+.doc p strong { color: var(--ink); font-weight: 700; }
+.doc ul { margin: 0 0 14px; padding-left: 0; list-style: none; }
+.doc ul li {
+  position: relative;
+  padding-left: 22px;
+  margin-bottom: 9px;
+  font-size: 16.5px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+.doc ul li::before {
+  content: "";
+  position: absolute;
+  left: 2px; top: 11px;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--brand-lift);
+}
+.doc a { color: var(--brand); font-weight: 500; text-underline-offset: 3px; }
+
+.doc .contact {
+  margin-top: 38px;
+  padding: 24px 26px;
+  background: var(--brand-tint);
+  border-radius: 14px;
+}
+.doc .contact p { margin: 0; }
+
+.to-top {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 34px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink-mute);
+  text-decoration: none;
+}
+.to-top:hover { color: var(--brand); }
+</style>
+<noscript><style>.rise { opacity: 1; transform: none; }</style></noscript>
+</head>
+<body>
+
+<!-- ══════════════ HERO ══════════════ -->
+<header class="purple" id="top">
+  <div class="shell">
+    <nav>
+      <a class="wordmark" href="#top" style="color:#fff">
+        <svg width="29" height="29" viewBox="0 0 64 64" aria-hidden="true">
+          <path d="M32 10 60 24 32 38 4 24Z" fill="#D7C2F5"/>
+          <path d="M16 30v9c0 5.5 7.2 9.5 16 9.5s16-4 16-9.5v-9l-16 8Z" fill="#A784DF"/>
+          <path d="M53 26v12" stroke="#D7C2F5" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="53" cy="42" r="4" fill="#D7C2F5"/>
+        </svg>
+        Axis
+      </a>
+      <div class="nav-right">
+        <a class="quiet" href="#how">How it works</a>
+        <a class="quiet" href="#privacy">Privacy</a>
+        <a class="btn" href="mailto:axis.app@outlook.com?subject=Axis%20early%20access">Get early access</a>
+      </div>
+    </nav>
+
+    <div class="hero">
+      <div>
+        <p class="eyebrow rise">For verified Western students</p>
+        <h1 class="rise">Sell it to someone who sits <em>three rows behind you.</em></h1>
+        <p class="lede rise">
+          A buy, sell, and trade marketplace that stops at the edge of campus. Every account
+          is a real <span class="mono-inline">@uwo.ca</span> address. Every pickup is a walk.
+        </p>
+        <div class="cta-row rise">
+          <a class="btn" href="mailto:axis.app@outlook.com?subject=Axis%20early%20access">
+            Get early access
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <span class="soon"><span class="dot"></span>Coming to the App Store</span>
+        </div>
+      </div>
+
+      <!-- Three real listings, drawn the way the app draws them. -->
+      <div class="stack rise" aria-label="Example listings on Axis">
+        <article class="lcard l1">
+          <div class="thumb t-book">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 4.5h6a2.5 2.5 0 0 1 2.5 2.5v12A2 2 0 0 0 10.5 17H4V4.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M20 4.5h-6A2.5 2.5 0 0 0 11.5 7v12A2 2 0 0 1 13.5 17H20V4.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+          </div>
+          <div>
+            <span class="cat">Textbooks</span>
+            <h3>Calculus textbook, 8th ed.</h3>
+            <div class="meta">
+              <span class="price">$45</span><span class="sep">·</span><span>Good condition</span><span class="sep">·</span>
+              <span class="tick"><svg width="11" height="11" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0.8 9.9 2.6l2.6-.2.5 2.5 2.2 1.4-1.2 2.3 1.2 2.3-2.2 1.4-.5 2.5-2.6-.2L8 15.2l-1.9-1.8-2.6.2-.5-2.5L.8 9.7 2 7.4.8 5.1l2.2-1.4.5-2.5 2.6.2L8 .8Z"/><path d="m5.4 7.9 1.8 1.8 3.4-3.6" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Maya S.</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="lcard l2">
+          <div class="thumb t-fridge">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="6" y="2.8" width="12" height="18.4" rx="2.4" stroke="currentColor" stroke-width="1.6"/><path d="M6 10h12" stroke="currentColor" stroke-width="1.6"/><path d="M9 6.4v1.8M9 12.6v2.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          </div>
+          <div>
+            <span class="cat">Furniture</span>
+            <h3>Mini fridge, 3.2 cu ft</h3>
+            <div class="meta">
+              <span class="price">$60</span><span class="sep">·</span><span>Like new</span><span class="sep">·</span>
+              <span class="tick"><svg width="11" height="11" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0.8 9.9 2.6l2.6-.2.5 2.5 2.2 1.4-1.2 2.3 1.2 2.3-2.2 1.4-.5 2.5-2.6-.2L8 15.2l-1.9-1.8-2.6.2-.5-2.5L.8 9.7 2 7.4.8 5.1l2.2-1.4.5-2.5 2.6.2L8 .8Z"/><path d="m5.4 7.9 1.8 1.8 3.4-3.6" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Daniel O.</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="lcard l3">
+          <div class="thumb t-ticket">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 7.5A1.5 1.5 0 0 1 4.5 6h15A1.5 1.5 0 0 1 21 7.5v2a2.5 2.5 0 0 0 0 5v2a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 16.5v-2a2.5 2.5 0 0 0 0-5v-2Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M14 6.6v10.8" stroke="currentColor" stroke-width="1.6" stroke-dasharray="2 2.4"/></svg>
+          </div>
+          <div>
+            <span class="cat">Tickets</span>
+            <h3>Home game ticket, Saturday</h3>
+            <div class="meta">
+              <span class="price">$25</span><span class="sep">·</span><span>Student centre</span><span class="sep">·</span>
+              <span class="tick"><svg width="11" height="11" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0.8 9.9 2.6l2.6-.2.5 2.5 2.2 1.4-1.2 2.3 1.2 2.3-2.2 1.4-.5 2.5-2.6-.2L8 15.2l-1.9-1.8-2.6.2-.5-2.5L.8 9.7 2 7.4.8 5.1l2.2-1.4.5-2.5 2.6.2L8 .8Z"/><path d="m5.4 7.9 1.8 1.8 3.4-3.6" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Priya R.</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ══════════════ CATEGORY BAND ══════════════ -->
+<div class="band">
+  <div class="shell">
+    <div class="inner">
+      <span class="eyebrow">Browse</span>
+      <span class="pill on">Textbooks</span>
+      <span class="pill">Furniture</span>
+      <span class="pill">Electronics</span>
+      <span class="pill">Tickets</span>
+      <span class="pill">Clothing</span>
+      <span class="pill">Sports</span>
+      <span class="pill">Other</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ HOW IT WORKS ══════════════ -->
+<section id="how">
+  <div class="shell">
+    <div class="sec-head rise">
+      <div>
+        <p class="eyebrow">How it works</p>
+        <h2>Three steps, and none of them involve a stranger's driveway.</h2>
+      </div>
+      <p>
+        Campus marketplaces already exist — they're just buried in group chats and
+        classifieds built for a whole city. Axis is the version scoped to people you
+        already share a library with.
+      </p>
+    </div>
+
+    <div class="steps rise">
+      <article class="step">
+        <span class="n">STEP 01</span>
+        <h3>Verify once</h3>
+        <p>Sign up with your @uwo.ca address. A six-digit code confirms you're a student — the only thing standing between the marketplace and the rest of the internet.</p>
+      </article>
+      <article class="step">
+        <span class="n">STEP 02</span>
+        <h3>Post in a minute</h3>
+        <p>Photos, a price, the condition, and where you'll hand it over. Mark it negotiable or open to trades.</p>
+      </article>
+      <article class="step">
+        <span class="n">STEP 03</span>
+        <h3>Meet on campus</h3>
+        <p>Message in the app, pick a busy spot between classes, settle it in person. Axis never touches the money.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ TRUST ══════════════ -->
+<section class="trust">
+  <div class="shell">
+    <div class="sec-head rise">
+      <div>
+        <p class="eyebrow">Safety</p>
+        <h2>A small marketplace can afford to be strict.</h2>
+      </div>
+      <p>Every protection here is enforced on our servers, not just in the app.</p>
+    </div>
+
+    <div class="tgrid rise">
+      <article class="tcard">
+        <div class="ico">
+          <svg width="19" height="19" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 2 17 5v5.2c0 4.2-3 7.1-7 7.8-4-.7-7-3.6-7-7.8V5l7-3Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="m7 10 2.2 2.2L13.4 8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Students only</h3>
+        <p>The email domain is checked at signup and again in the database, so an account can't exist without a real student address behind it.</p>
+      </article>
+      <article class="tcard">
+        <div class="ico">
+          <svg width="19" height="19" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="7.4" stroke="currentColor" stroke-width="1.6"/><path d="M4.8 4.8l10.4 10.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Report and block</h3>
+        <p>Every listing, profile, and conversation carries both. Block someone and you disappear from each other's feed and inbox immediately.</p>
+      </article>
+      <article class="tcard">
+        <div class="ico">
+          <svg width="19" height="19" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="2.6" y="5.4" width="14.8" height="9.6" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M2.6 8.6h14.8" stroke="currentColor" stroke-width="1.6"/><path d="M5.6 12.2h3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </div>
+        <h3>No money to intercept</h3>
+        <p>Axis never holds funds and takes no fee. Deals settle in person, which removes the entire category of payment scams.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ CLOSING ══════════════ -->
+<section class="purple closing">
+  <div class="shell">
+    <h2>Your campus already has everything you need.</h2>
+    <p>Axis just makes it findable. Join the first students getting access at launch.</p>
+    <a class="btn" href="mailto:axis.app@outlook.com?subject=Axis%20early%20access">
+      Get early access
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  </div>
+</section>
+
+<!-- ══════════════ PRIVACY POLICY ══════════════
+     Lives on the page rather than behind a modal on purpose: the URL Apple
+     is given (…/#privacy) has to render the policy on load, not after a
+     click. Kept last so it reads as an appendix, not part of the pitch. -->
+<section class="policy" id="privacy">
+  <div class="shell">
+    <div class="doc rise">
+      <h2>Privacy policy</h2>
+      <p class="stamp">Last updated: August 30, 2026</p>
+
+      <p class="intro">
+        Axis is a marketplace built for verified university students. This policy explains
+        what information we collect, how we use it, and the choices you have. We keep it
+        short because you deserve to actually read it.
+      </p>
+
+      <h3>Information we collect</h3>
+      <p>
+        When you create an account we collect your name and your Western-issued @uwo.ca (or
+        @alumni.uwo.ca) email address, which we use to confirm you are part of the Western
+        community.
+      </p>
+      <p>As you use Axis we also store:</p>
+      <ul>
+        <li>The listings you post — titles, prices, photos, and descriptions.</li>
+        <li>The messages you send to other students.</li>
+        <li>Basic activity such as the items you save or view.</li>
+        <li>Your profile details, including an optional photo and bio.</li>
+      </ul>
+      <p>
+        We do not collect your location, your contacts, or any advertising identifier. Axis
+        contains no advertising or analytics SDKs.
+      </p>
+
+      <h3>How we use your information</h3>
+      <p>
+        We use your information to verify your student status, show your listings to other
+        buyers, deliver messages, keep the marketplace safe, and improve the app. We may
+        send you service notifications about your account, your listings, or your
+        conversations.
+      </p>
+
+      <h3>How we share information</h3>
+      <p>
+        Your name and active listings are visible to other verified students so they can buy
+        from you. <strong>We do not sell your personal information, and we do not use it for
+        advertising or tracking.</strong>
+      </p>
+      <p>Two service providers process data on our behalf, and both are contractually required to protect it:</p>
+      <ul>
+        <li><strong>Supabase</strong> hosts our database, file storage, and sign-in.</li>
+        <li><strong>Sentry</strong> receives crash reports when the app fails. Crash reports contain the technical details of the failure and your device model — never your name, email, messages, or listings.</li>
+      </ul>
+      <p>
+        We share data otherwise only when required by law or to protect the safety of our
+        community.
+      </p>
+
+      <h3>How we protect it</h3>
+      <p>
+        Your sign-in session is encrypted on your device and the key is held in the operating
+        system's secure keychain. All traffic between the app and our servers is encrypted in
+        transit. Access is enforced row by row in the database, so one account cannot read
+        another's private data even if the app is modified.
+      </p>
+
+      <h3>Data retention</h3>
+      <p>
+        We keep your account information while your account is active. When you delete your
+        account we remove your profile and listings, though we may retain limited records
+        where needed to resolve disputes, prevent abuse, or comply with legal obligations.
+      </p>
+
+      <h3>Your choices</h3>
+      <p>
+        You can edit or delete your listings at any time, update your profile details, and
+        block anyone you no longer want to hear from. You can delete your account from the
+        Settings screen inside the app, which permanently removes your profile, listings,
+        photos, and messages.
+      </p>
+      <p>
+        Depending on where you live, you may also have the right to request a copy of the
+        personal information we hold about you, to correct it, or to ask us to delete it.
+        Email us and we will help.
+      </p>
+
+      <h3>Children</h3>
+      <p>
+        Axis is intended for university students and is not directed at children. We do not
+        knowingly collect personal information from anyone under 13. If you believe a child
+        has created an account, contact us and we will remove it.
+      </p>
+
+      <h3>Changes to this policy</h3>
+      <p>
+        If we change how we handle your information, we will update this page and revise the
+        date above. Significant changes will also be surfaced in the app.
+      </p>
+
+      <div class="contact">
+        <p>
+          Questions about your privacy? Reach our team at
+          <a href="mailto:axis.app@outlook.com">axis.app@outlook.com</a> and we will get back to you.
+        </p>
+      </div>
+
+      <a class="to-top" href="#top">
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M8 13V3M4 7l4-4 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Back to top
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ FOOTER ══════════════ -->
+<footer>
+  <div class="shell">
+    <div class="foot-top">
+      <a class="wordmark" href="#top">
+        <svg width="26" height="26" viewBox="0 0 64 64" aria-hidden="true">
+          <path d="M32 10 60 24 32 38 4 24Z" fill="#5F2F96"/>
+          <path d="M16 30v9c0 5.5 7.2 9.5 16 9.5s16-4 16-9.5v-9l-16 8Z" fill="#A784DF"/>
+          <path d="M53 26v12" stroke="#5F2F96" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="53" cy="42" r="4" fill="#5F2F96"/>
+        </svg>
+        Axis
+      </a>
+      <div class="foot-links">
+        <a href="#how">How it works</a>
+        <a href="#privacy">Privacy policy</a>
+        <a href="mailto:axis.app@outlook.com">Support</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <p>
+        Axis is an independent app. It is not affiliated with, endorsed by, or sponsored by
+        Western University. Student email addresses are used only to confirm that members of
+        the marketplace are students.
+      </p>
+      <p>© 2026 Axis</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Entrance reveals. Content is visible without JS (see the noscript rule).
+  (function () {
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var items = document.querySelectorAll('.rise');
+    if (reduce || !('IntersectionObserver' in window)) {
+      items.forEach(function (el) { el.classList.add('in'); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var el = entry.target;
+        var sibs = Array.prototype.slice.call(el.parentNode.querySelectorAll(':scope > .rise'));
+        el.style.transitionDelay = Math.min(sibs.indexOf(el), 4) * 85 + 'ms';
+        el.classList.add('in');
+        io.unobserve(el);
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+    items.forEach(function (el) { io.observe(el); });
+  })();
+</script>
+
+</body>
+</html>
