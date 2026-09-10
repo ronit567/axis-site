@@ -45,7 +45,8 @@
   line-height: 1.58;
   color: var(--on-brand-soft);
 }
-.hero .mono-inline { font-family: var(--mono); font-size: 0.93em; }
+.hero .mono-inline,
+.doc .mono-inline { font-family: var(--mono); font-size: 0.93em; }
 
 .cta-row {
   display: flex;
@@ -352,6 +353,7 @@
       </a>
       <div class="nav-right">
         <a class="quiet" href="#how">How it works</a>
+        <a class="quiet" href="#support">Support</a>
         <a class="quiet" href="#privacy">Privacy</a>
         <a class="btn" href="mailto:axis.app@outlook.com?subject=Axis%20early%20access">Get early access</a>
       </div>
@@ -586,6 +588,12 @@
 
       <h3>How we protect it</h3>
       <p>
+        Photos you attach to a listing are served from a public web address, so anyone
+        who has that address can open the image — that is what lets listings load
+        quickly for every buyer. Your profile photo is not: it is stored privately and
+        shown only to signed-in Axis members, through a link that expires.
+      </p>
+      <p>
         Your sign-in session is encrypted on your device and the key is held in the operating
         system's secure keychain. All traffic between the app and our servers is encrypted in
         transit. Access is enforced row by row in the database, so one account cannot read
@@ -642,6 +650,273 @@
   </div>
 </section>
 
+
+<!-- ────────────────────────── SUPPORT ──────────────────────────
+     This is the section App Store Connect's "Support URL" must point at.
+     Apple requires an http(s) URL there — a mailto: link is not accepted.
+     ─────────────────────────────────────────────────────────────── -->
+<section class="policy" id="support">
+  <div class="shell">
+    <div class="doc rise">
+      <h2>Support</h2>
+      <p class="stamp">We reply to every message within 24 hours</p>
+
+      <p class="intro">
+        Something broken, someone behaving badly, or a question about your account?
+        Email <a href="mailto:axis.app@outlook.com">axis.app@outlook.com</a> and a real
+        person will get back to you. The answers to the most common questions are below.
+      </p>
+
+      <h3>Report a listing, a profile, or a conversation</h3>
+      <p>Every piece of content in Axis can be reported from the screen you found it on:</p>
+      <ul>
+        <li><strong>A listing</strong> — open it and tap the flag icon at the top right.</li>
+        <li><strong>A person</strong> — open their profile and tap the <strong>&middot;&middot;&middot;</strong> button at the top right.</li>
+        <li><strong>A conversation</strong> — open the chat and tap the flag icon in the header.</li>
+      </ul>
+      <p>
+        Pick a reason — spam, a prohibited item, harassment, or something else — and send it.
+        Reports are confidential: the person you report is never told who filed it. Our team
+        reviews every report and responds within 24 hours. Content that breaks our
+        <a href="#guidelines">community guidelines</a> is removed, and the accounts behind it
+        are suspended or permanently banned.
+      </p>
+
+      <h3>Block someone</h3>
+      <p>
+        The same sheet that files a report also offers to block. Blocking is immediate and
+        mutual: you disappear from each other's feed, search results, and inbox, and neither
+        of you can start a new conversation with the other. You do not have to file a report
+        to block someone.
+      </p>
+      <p>
+        To see who you have blocked, or to unblock them, open
+        <strong>Settings &rarr; Blocked users</strong>.
+      </p>
+
+      <h3>Delete your account</h3>
+      <p>
+        Open <strong>Settings &rarr; Delete account</strong> and type <span class="mono-inline">DELETE</span>
+        to confirm. This is immediate and cannot be undone. It permanently removes your profile,
+        your listings, every photo you uploaded, your messages, your saved items, and your blocks.
+      </p>
+      <p>
+        One thing to know before you do it: to keep deletion from being used to escape a block or
+        a report history, the same email address cannot create a new Axis account for 14 days
+        afterwards. If you only want a break, signing out is the better option.
+      </p>
+
+      <h3>Trouble signing up or signing in</h3>
+      <ul>
+        <li>
+          Axis only accepts <span class="mono-inline">@uwo.ca</span> and
+          <span class="mono-inline">@alumni.uwo.ca</span> addresses. Any other address is
+          turned away at signup — this is the check that keeps the marketplace to students.
+        </li>
+        <li>
+          Signing up sends a six-digit code to that address. If it has not arrived after a
+          minute, check your junk folder before requesting another.
+        </li>
+        <li>
+          Forgot your password? Tap <strong>Forgot password</strong> on the sign-in screen, or
+          <strong>Settings &rarr; Change password</strong> if you are already signed in. Both
+          send a code to your student address.
+        </li>
+      </ul>
+
+      <h3>Staying safe on campus</h3>
+      <p>
+        Axis never holds money and takes no fee — every deal is settled in person, which is why
+        we ask you to meet in a busy public spot on campus during daylight, inspect an item
+        before you pay, and share no more personal information than the handoff needs. If a
+        conversation makes you uncomfortable, block first and report second; you do not owe
+        anyone an explanation.
+      </p>
+
+      <div class="contact">
+        <p>
+          Still stuck? Email <a href="mailto:axis.app@outlook.com">axis.app@outlook.com</a>.
+          Include your student email address and, if it helps, a screenshot — it gets you a
+          faster answer.
+        </p>
+      </div>
+
+      <a class="to-top" href="#top">
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M8 13V3M4 7l4-4 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Back to top
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ─────────────────── COMMUNITY GUIDELINES ───────────────────
+     Guideline 1.2 expects a UGC app to publish the standards it enforces.
+     This mirrors CommunityGuidelinesScreen in the app, word for word where
+     it matters, so the two never drift apart.
+     ─────────────────────────────────────────────────────────────── -->
+<section class="policy" id="guidelines">
+  <div class="shell">
+    <div class="doc rise">
+      <h2>Community guidelines</h2>
+      <p class="stamp">Last updated: August 30, 2026</p>
+
+      <p class="intro">
+        Axis works because students look out for each other. These guidelines keep the
+        marketplace welcoming, honest, and safe. Break them and you may lose access to Axis.
+      </p>
+
+      <h3>Be respectful</h3>
+      <p>
+        Treat every student the way you would want to be treated. Keep messages polite,
+        communicate clearly, and honor the deals you agree to. A little courtesy goes a long
+        way on a campus you share.
+      </p>
+
+      <h3>No prohibited or illegal items</h3>
+      <p>
+        Do not list anything illegal or unsafe, including alcohol, drugs, weapons, stolen
+        goods, counterfeit items, or anything that violates your school's policies. If it
+        wouldn't be allowed on campus, it doesn't belong on Axis.
+      </p>
+
+      <h3>No harassment or scams</h3>
+      <p>
+        Harassment, hate speech, threats, and discrimination are never tolerated. Do not
+        attempt to scam other students, post fake listings, ask for payment outside an agreed
+        exchange, or pressure anyone into a deal.
+      </p>
+
+      <h3>Nothing sexually explicit</h3>
+      <p>
+        Listings, photos, profiles, reviews, and messages must stay free of sexually explicit
+        or otherwise objectionable content. This is enforced on our servers, not just in the
+        app — some language is rejected the moment you try to post it.
+      </p>
+
+      <h3>Meet safely on campus</h3>
+      <p>
+        Arrange to meet in busy, public spots on campus during daylight, such as the student
+        centre or library. Inspect items before you pay, and never share more personal
+        information than a transaction requires.
+      </p>
+
+      <h3>Reporting</h3>
+      <p>
+        If you see a listing or message that breaks these guidelines, report it so our team
+        can review it. You can also block users you no longer want to hear from. Reports are
+        confidential and help keep Axis safe for everyone.
+        <a href="#support">How to report or block &rarr;</a>
+      </p>
+      <p>
+        Our team reviews every report and responds within 24 hours. Content that violates
+        these guidelines is removed, and the accounts responsible for it are suspended or
+        permanently banned from Axis.
+      </p>
+
+      <div class="contact">
+        <p>
+          For anything urgent, or if you'd rather reach us directly, email
+          <a href="mailto:axis.app@outlook.com">axis.app@outlook.com</a>.
+        </p>
+      </div>
+
+      <a class="to-top" href="#top">
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M8 13V3M4 7l4-4 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Back to top
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ────────────────────────── TERMS ──────────────────────────
+     Mirrors TermsOfServiceScreen in the app. Hosting it means the Terms
+     link users tick at signup points at something that also exists on the
+     open web, and it can be used as the EULA URL in App Store Connect.
+     ─────────────────────────────────────────────────────────────── -->
+<section class="policy" id="terms">
+  <div class="shell">
+    <div class="doc rise">
+      <h2>Terms of service</h2>
+      <p class="stamp">Last updated: August 30, 2026</p>
+
+      <p class="intro">
+        Welcome to Axis. By creating an account or using the app you agree to these terms.
+        They keep the marketplace fair and safe for every student.
+      </p>
+
+      <h3>Eligibility</h3>
+      <p>
+        Axis is only for members of the Western University community. You must sign up with a
+        valid @uwo.ca or @alumni.uwo.ca email address and complete verification. You are
+        responsible for keeping your login credentials secure and for all activity on your
+        account.
+      </p>
+
+      <h3>Acceptable use</h3>
+      <p>
+        Use Axis honestly and respectfully. Do not post misleading listings, impersonate
+        others, spam, or attempt to access accounts that are not yours. You may not use the
+        app for any unlawful purpose or in a way that disrupts the service for other students.
+      </p>
+
+      <h3>Objectionable content</h3>
+      <p>
+        There is no tolerance for objectionable content or abusive behaviour on Axis. You may
+        not post or send content that is harassing, hateful, threatening, sexually explicit,
+        discriminatory, or otherwise objectionable, in any listing, photo, message, review, or
+        profile. Report anything that breaks this rule and our team will review it within 24
+        hours. Content that violates these terms or our
+        <a href="#guidelines">community guidelines</a> is removed, and the accounts responsible
+        for it are suspended or permanently banned from Axis.
+      </p>
+
+      <h3>Listings and transactions</h3>
+      <p>
+        You are responsible for the items you list, including their accuracy, pricing,
+        condition, and legality. Transactions happen directly between buyers and sellers. Axis
+        is a platform to connect students; we are not a party to any sale and do not process
+        payments or guarantee any item. Always confirm details and meet safely before
+        exchanging money.
+      </p>
+
+      <h3>Disclaimer of liability</h3>
+      <p>
+        Axis is provided "as is" without warranties of any kind. We are not responsible for
+        the quality, safety, or legality of listed items, the conduct of users, or the outcome
+        of any transaction. To the fullest extent permitted by law, Axis is not liable for any
+        loss arising from your use of the app.
+      </p>
+
+      <h3>Termination</h3>
+      <p>
+        You may stop using Axis and delete your account at any time. We may suspend or
+        terminate accounts that violate these terms or our community guidelines, or that put
+        other students at risk.
+      </p>
+
+      <div class="contact">
+        <p>
+          Questions about these terms? Email us at
+          <a href="mailto:axis.app@outlook.com">axis.app@outlook.com</a>.
+        </p>
+      </div>
+
+      <a class="to-top" href="#top">
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M8 13V3M4 7l4-4 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Back to top
+      </a>
+    </div>
+  </div>
+</section>
+
 <!-- ══════════════ FOOTER ══════════════ -->
 <footer>
   <div class="shell">
@@ -657,8 +932,10 @@
       </a>
       <div class="foot-links">
         <a href="#how">How it works</a>
+        <a href="#support">Support</a>
         <a href="#privacy">Privacy policy</a>
-        <a href="mailto:axis.app@outlook.com">Support</a>
+        <a href="#terms">Terms</a>
+        <a href="#guidelines">Community guidelines</a>
       </div>
     </div>
     <div class="foot-bottom">
