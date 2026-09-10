@@ -244,11 +244,32 @@
 .closing .btn { margin-top: 30px; }
 @media (max-width: 760px) { .closing { padding: 68px 0; } }
 
-/* ── privacy policy ───────────────────────────────────────── */
+/* ── legal & support documents ─────────────────────────────
+   Four of these stack now: privacy, support, guidelines, terms. The generic
+   `section { padding: 96px 0 }` was written when privacy was the only one and
+   the last thing on the page, so four of them put 192px of empty ground
+   between consecutive cards — the set read as isolated islands adrift on the
+   tinted background rather than one shelf of documents.
+
+   Space stays generous INSIDE each card, where the reading happens, and is
+   tightened BETWEEN them. The first keeps its full lead-in from the section
+   rule and the last keeps its full run-out to the footer; only the joins
+   close up. */
 .policy {
   background: var(--paper-alt);
-  scroll-margin-top: 0;
+  padding-bottom: 34px;
+  /* Jumping here from a footer link should leave the card a little air rather
+     than pinning its top edge to the very top of the viewport. */
+  scroll-margin-top: 28px;
 }
+.policy + .policy { padding-top: 0; }
+.policy:last-of-type { padding-bottom: 96px; }
+
+@media (max-width: 760px) {
+  .policy { padding-bottom: 22px; }
+  .policy:last-of-type { padding-bottom: 68px; }
+}
+
 .policy .doc {
   background: var(--card);
   border: 1px solid var(--line);
