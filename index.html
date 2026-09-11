@@ -245,40 +245,95 @@
 @media (max-width: 760px) { .closing { padding: 68px 0; } }
 
 /* ── legal & support documents ─────────────────────────────
-   Four of these stack now: privacy, support, guidelines, terms. The generic
-   `section { padding: 96px 0 }` was written when privacy was the only one and
-   the last thing on the page, so four of them put 192px of empty ground
-   between consecutive cards — the set read as isolated islands adrift on the
-   tinted background rather than one shelf of documents.
+   Four long documents live here. Stacked and expanded they made the page
+   endless: reaching Terms meant scrolling past three other documents. They are
+   tabbed instead — one visible at a time, switched by the URL fragment — and
+   the tab bar is sticky, so you can change document at any scroll depth
+   without travelling back up.
 
-   Space stays generous INSIDE each card, where the reading happens, and is
-   tightened BETWEEN them. The first keeps its full lead-in from the section
-   rule and the last keeps its full run-out to the footer; only the joins
-   close up. */
-.policy {
+   NO JAVASCRIPT. The switch is :target and nothing else. That matters beyond
+   elegance: /privacy and /support are the URLs handed to App Store Connect, and
+   a reviewer following one with scripting disabled still lands on the right
+   document.
+
+   The whole mechanism sits behind @supports selector(:has(*)). Where :has() is
+   unavailable the block is skipped and all four documents render stacked —
+   the previous behaviour. Content is always in the DOM and never injected, so
+   the failure mode is "all visible", never "missing", which is the only
+   acceptable one for a compliance URL. */
+.docs { background: var(--paper-alt); }
+
+.docs-eyebrow {
+  color: var(--brand);
+  max-width: 760px;
+  margin: 0 auto 18px;
+}
+
+.doc-tabs {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  max-width: 760px;
+  margin: 0 auto 24px;
+  /* Opaque, and padded past the shell gutter, so a document scrolling underneath
+     never shows through the bar. */
   background: var(--paper-alt);
-  padding-bottom: 34px;
-  /* Jumping here from a footer link should leave the card a little air rather
-     than pinning its top edge to the very top of the viewport. */
-  scroll-margin-top: 28px;
-}
-.policy + .policy { padding-top: 0; }
-.policy:last-of-type { padding-bottom: 96px; }
-
-@media (max-width: 760px) {
-  .policy { padding-bottom: 22px; }
-  .policy:last-of-type { padding-bottom: 68px; }
+  padding: 14px 0 15px;
 }
 
-.policy .doc {
+.doc-tabs a {
+  font-family: var(--sans);
+  font-size: 14.5px;
+  font-weight: 500;
+  padding: 9px 17px;
+  border-radius: 24px;
+  border: 1px solid var(--brand-line);
+  background: var(--card);
+  color: var(--ink-soft);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.16s ease, color 0.16s ease, border-color 0.16s ease;
+}
+.doc-tabs a:hover { border-color: var(--brand-lift); color: var(--brand); }
+
+.docs .doc {
   background: var(--card);
   border: 1px solid var(--line);
   border-radius: 22px;
   padding: 54px 58px 56px;
   max-width: 760px;
   margin: 0 auto;
+  /* Clears the sticky bar when the fragment scrolls a document into view. */
+  scroll-margin-top: 82px;
 }
-@media (max-width: 760px) { .policy .doc { padding: 34px 24px 40px; border-radius: 16px; } }
+
+@media (max-width: 760px) {
+  .docs .doc { padding: 34px 24px 40px; border-radius: 16px; }
+  .doc-tabs a { font-size: 13.5px; padding: 8px 14px; }
+  /* The bar wraps to two rows at this width. */
+  .docs .doc { scroll-margin-top: 124px; }
+}
+
+@supports selector(:has(*)) {
+  .docs .doc { display: none; }
+  .docs .doc:target { display: block; }
+  /* Nothing in this section targeted — a bare load, or a fragment elsewhere on
+     the page such as #top — falls back to the privacy policy. */
+  .docs:not(:has(.doc:target)) #privacy { display: block; }
+
+  .docs:has(#privacy:target)    .doc-tabs a[href="#privacy"],
+  .docs:has(#support:target)    .doc-tabs a[href="#support"],
+  .docs:has(#guidelines:target) .doc-tabs a[href="#guidelines"],
+  .docs:has(#terms:target)      .doc-tabs a[href="#terms"],
+  .docs:not(:has(.doc:target))  .doc-tabs a[href="#privacy"] {
+    background: var(--brand);
+    border-color: var(--brand);
+    color: #FFFFFF;
+  }
+}
 
 .doc h2 {
   font-family: var(--display);
@@ -343,17 +398,6 @@
 }
 .doc .contact p { margin: 0; }
 
-.to-top {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 34px;
-  font-size: 15px;
-  font-weight: 500;
-  color: var(--ink-mute);
-  text-decoration: none;
-}
-.to-top:hover { color: var(--brand); }
 </style>
 <noscript><style>.rise { opacity: 1; transform: none; }</style></noscript>
 </head>
@@ -553,9 +597,22 @@
      Lives on the page rather than behind a modal on purpose: the URL Apple
      is given (…/#privacy) has to render the policy on load, not after a
      click. Kept last so it reads as an appendix, not part of the pitch. -->
-<section class="policy" id="privacy">
+<!-- ══════════════ LEGAL & SUPPORT ══════════════ -->
+<!-- One section, four documents, one visible at a time. The switch is the URL
+     fragment and nothing else, so /privacy and /support keep landing on the
+     right document with scripting disabled — see the @supports note in the CSS. -->
+<section class="docs" id="legal">
   <div class="shell">
-    <div class="doc rise">
+    <p class="eyebrow docs-eyebrow rise">Legal &amp; support</p>
+
+    <nav class="doc-tabs" aria-label="Legal and support documents">
+        <a href="#privacy">Privacy policy</a>
+        <a href="#support">Support</a>
+        <a href="#guidelines">Community guidelines</a>
+        <a href="#terms">Terms of service</a>
+    </nav>
+
+      <article class="doc" id="privacy">
       <h2>Privacy policy</h2>
       <p class="stamp">Last updated: August 30, 2026</p>
 
@@ -660,25 +717,9 @@
           <a href="mailto:axis.app@outlook.com">axis.app@outlook.com</a> and we will get back to you.
         </p>
       </div>
+      </article>
 
-      <a class="to-top" href="#top">
-        <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-          <path d="M8 13V3M4 7l4-4 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        Back to top
-      </a>
-    </div>
-  </div>
-</section>
-
-
-<!-- ────────────────────────── SUPPORT ──────────────────────────
-     This is the section App Store Connect's "Support URL" must point at.
-     Apple requires an http(s) URL there — a mailto: link is not accepted.
-     ─────────────────────────────────────────────────────────────── -->
-<section class="policy" id="support">
-  <div class="shell">
-    <div class="doc rise">
+      <article class="doc" id="support">
       <h2>Support</h2>
       <p class="stamp">We reply to every message within 24 hours</p>
 
@@ -761,26 +802,9 @@
           faster answer.
         </p>
       </div>
+      </article>
 
-      <a class="to-top" href="#top">
-        <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-          <path d="M8 13V3M4 7l4-4 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        Back to top
-      </a>
-    </div>
-  </div>
-</section>
-
-
-<!-- ─────────────────── COMMUNITY GUIDELINES ───────────────────
-     Guideline 1.2 expects a UGC app to publish the standards it enforces.
-     This mirrors CommunityGuidelinesScreen in the app, word for word where
-     it matters, so the two never drift apart.
-     ─────────────────────────────────────────────────────────────── -->
-<section class="policy" id="guidelines">
-  <div class="shell">
-    <div class="doc rise">
+      <article class="doc" id="guidelines">
       <h2>Community guidelines</h2>
       <p class="stamp">Last updated: August 30, 2026</p>
 
@@ -843,26 +867,9 @@
           <a href="mailto:axis.app@outlook.com">axis.app@outlook.com</a>.
         </p>
       </div>
+      </article>
 
-      <a class="to-top" href="#top">
-        <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-          <path d="M8 13V3M4 7l4-4 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        Back to top
-      </a>
-    </div>
-  </div>
-</section>
-
-
-<!-- ────────────────────────── TERMS ──────────────────────────
-     Mirrors TermsOfServiceScreen in the app. Hosting it means the Terms
-     link users tick at signup points at something that also exists on the
-     open web, and it can be used as the EULA URL in App Store Connect.
-     ─────────────────────────────────────────────────────────────── -->
-<section class="policy" id="terms">
-  <div class="shell">
-    <div class="doc rise">
+      <article class="doc" id="terms">
       <h2>Terms of service</h2>
       <p class="stamp">Last updated: August 30, 2026</p>
 
@@ -927,14 +934,7 @@
           <a href="mailto:axis.app@outlook.com">axis.app@outlook.com</a>.
         </p>
       </div>
-
-      <a class="to-top" href="#top">
-        <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-          <path d="M8 13V3M4 7l4-4 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        Back to top
-      </a>
-    </div>
+      </article>
   </div>
 </section>
 
